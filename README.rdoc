@@ -1,28 +1,37 @@
-== README
+== Blue Origins Teleporter
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The year is 2092, people are using teleportation instead of taking planes, boats or cars.
 
-Things you may want to cover:
+* Ruby version: 2.2.3
 
-* Ruby version
+* Rails version: 4.2.6
 
-* System dependencies
+# Setup
 
-* Configuration
+This app is running with `Docker`. In order to run the app launch the following command:
 
-* Database creation
+```bash
+docker-compose up
+```
 
-* Database initialization
+Then please go to [localhost](http://0.0.0.0:8000)
 
-* How to run the test suite
+# Tests
 
-* Services (job queues, cache servers, search engines, etc.)
+## Syntax
 
-* Deployment instructions
+Even though Ruby doesn't have a guide style, all the file's syntax have been check using `pre-commit hook` with the popular hook `rubocop`.
 
-* ...
+## Code coverage
 
+All the controllers have been properly tested with RSpec.
+To run the tests yourself, please do:
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+```bash
+docker-compose run teleporter rake rspec .
+```
+
+# How to use the app?
+
+Please enter you destination and your dates, click on `book` and enjoy your incomming teleportation!
+

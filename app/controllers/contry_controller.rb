@@ -1,0 +1,2 @@
+class ContryController < ApplicationController
+end

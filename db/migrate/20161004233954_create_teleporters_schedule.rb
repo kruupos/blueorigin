@@ -7,9 +7,5 @@ class CreateTeleportersSchedule < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-
-    add_index :teleporters_schedules [:departure_id, :arrival_id]
-    add_foreign_key :teleporters_schedules, :cities, column: :departure_id, on_update: :cascade, on_delete: :cascade
-    add_foreign_key :teleporters_schedules, :cities, column: :arrival_id, on_update: :cascade, on_delete: :cascade
   end
 end

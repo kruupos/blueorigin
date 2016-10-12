@@ -1,0 +1,1 @@
+cities = City.create([{ name: 'Chicago', country: 'USA' }, { name: 'Copenhagen', country: 'Danemark' }])
