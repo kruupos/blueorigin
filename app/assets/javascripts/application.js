@@ -14,7 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap.min
-//= require bootstrap-datepicker
+//= require bootstrap-datepicker.min
 //= require jquery-jvectormap-2.0.3.min
 //= require jquery-jvectormap-world-mill
 //= require_tree .

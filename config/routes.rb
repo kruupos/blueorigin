@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :schedule, only: [:create] 
+  resources :schedules, only: [:create] 
 
   root 'home#index'
 

@@ -42,3 +42,12 @@ $(function(){
     ]
   });
 });
+
+$(function(){
+  $('.datepicker').datepicker({
+    todayHighlight: true, 
+    orientation: 'auto top', 
+    format: 'yyyy-mm-dd',
+    startDate: '1d'
+  });
+});
