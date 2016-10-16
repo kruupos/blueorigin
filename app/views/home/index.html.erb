@@ -1,0 +1,55 @@
+<div id='main-container' class='container-fluid'>
+  <div class='row'>
+    <div id='sidebar' class='col-xs-3'>
+
+      <h1>Blue Origin Reservation</h1>
+      <p>Please enter all your information before be able to book our teleporters</p>
+      </br>
+      </br>
+
+      <%= form_tag('schedule', method: 'post', :class => 'form-horizontal') do %>
+        <fieldset>
+          <legend>Reservations</legend>
+          <% span= @user.errors[:user].first %>
+          <div class='form-group'>
+            <%= label_tag(:user, 'Name', :class => 'col-lg-2 control-label') %>
+            <div class='col-lg-10'>
+              <%= text_field_tag(:user, nil, :placeholder => 'Your name', :class => 'form-control') %>
+            </div>
+          </div>
+          <div class='form-group'>
+            <%= label_tag(:arrival, 'Departure', :class => 'col-lg-2 control-label') %>
+            <div class='col-lg-10'>
+              <%= collection_select(:departure, :id, @cities, :id, :name, {}, {:class => 'form-control'}) %>
+            </div>
+          </div>
+          <div class='form-group'>
+            <%= label_tag(:arrival, 'Arrival', :class => 'col-lg-2 control-label') %>
+            <div class='col-lg-10'>
+              <%= collection_select(:arrival, :id, @cities, :id, :name, {}, {:class => 'form-control'}) %>
+            </div>
+          </div>
+          <div class='form-group'>
+            <%= label(:date, 'Date', :class => 'col-lg-2 control-label') %>
+            <div class='col-lg-10'>
+              <%= text_field_tag(:date, nil, :class => 'form-control', :data => {:provide => 'datepicker'}) %>
+            </div>
+          </div>
+          <div class='form-group'>
+            <div class='col-lg-10 col-lg-offset-2'>
+              <%= submit_tag('Book', :class => 'btn btn-success') %>
+            </div>
+          </div>
+        </fieldset>
+      <% end %>
+
+    <% flash.each do |name, msg| %>
+      <%= content_tag :div, msg, class: "alert alert-info" %>
+    <% end %>
+  
+    </div>
+    <div id='sidebar' class='col-xs-9'>
+      <div id="world-map"></div>
+    </div>
+  </div>
+</div>

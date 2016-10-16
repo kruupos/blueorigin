@@ -1,31 +1,31 @@
 postgres:
   image: postgres:9.4.5
   environment:
-    POSTGRES_USER: teleporter
-    POSTGRES_PASSWORD: talentoday
+    POSTGRES_USER: blueorigin
+    POSTGRES_PASSWORD: max
   ports:
     - '5432:5432'
   volumes:
-    - teleporter-postgres:/var/lib/postgresql/data
+    - blueorigin-postgres:/var/lib/postgresql/data
 
 redis:
   image: redis:3.0.5
   ports:
     - '6379:6379'
   volumes:
-    - teleporter-redis:/var/lib/redis/data
+    - blueorigin-redis:/var/lib/redis/data
 
-teleporter:
+blueorigin:
   build: .
   links:
     - postgres
     - redis
   volumes:
-    - .:/teleporter
+    - .:/blueorigin
   ports:
     - '8000:8000'
   env_file:
-    - .teleporter.env
+    - .blueorigin.env
 
 sidekiq:
   build: .
@@ -34,6 +34,6 @@ sidekiq:
     - postgres
     - redis
   volumes:
-    - .:/teleporter
+    - .:/blueorigin
   env_file:
-    - .teleporter.env
+    - .blueorigin.env

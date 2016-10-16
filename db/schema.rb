@@ -23,19 +23,19 @@ ActiveRecord::Schema.define(version: 20161005060314) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "teleporters", force: :cascade do |t|
-    t.integer  "schedule_id", null: false
-    t.integer  "user_id",     null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  create_table "teleporters_schedules", force: :cascade do |t|
+  create_table "schedules", force: :cascade do |t|
     t.integer  "departure_id", null: false
     t.integer  "arrival_id",   null: false
     t.date     "date",         null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "teleporters", force: :cascade do |t|
+    t.integer  "schedule_id", null: false
+    t.integer  "user_id",     null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -44,8 +44,8 @@ ActiveRecord::Schema.define(version: 20161005060314) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "teleporters", "teleporters_schedules", column: "schedule_id", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "schedules", "cities", column: "arrival_id", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "schedules", "cities", column: "departure_id", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "teleporters", "schedules", on_update: :cascade, on_delete: :cascade
   add_foreign_key "teleporters", "users", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "teleporters_schedules", "cities", column: "arrival_id", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "teleporters_schedules", "cities", column: "departure_id", on_update: :cascade, on_delete: :cascade
 end

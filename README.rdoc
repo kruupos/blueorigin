@@ -6,9 +6,27 @@ The year is 2092, people are using teleportation instead of taking planes, boats
 
 * Rails version: 4.2.6
 
+# Requierments
+
+* Docker
+
+* Docker-compose
+
 # Setup
 
+Clone this repository.
 This app is running with `Docker`. In order to run the app launch the following command:
+
+## Initialize volume and databases
+
+```bash
+docker volume create --name blueorigin-postgres
+docker volume create --name blueorigin-redis
+docker-compose run blueorigin rake db:reset
+docker-compose run blueorigin rake db:migrate
+```
+
+## Run the app
 
 ```bash
 docker-compose up
@@ -28,7 +46,7 @@ All the controllers have been properly tested with RSpec.
 To run the tests yourself, please do:
 
 ```bash
-docker-compose run teleporter rake rspec .
+docker-compose run blueorigin rake rspec .
 ```
 
 # How to use the app?

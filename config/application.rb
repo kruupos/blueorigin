@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Teleporter
+module Blueorigin
   class Application < Rails::Application
     # We want to set up a custom logger which logs to STDOUT.
     # Docker expects your application to log to STDOUT/STDERR and to be ran
@@ -18,7 +18,7 @@ module Teleporter
     # Since we're using Redis for Sidekiq, we might as well use Redis to back
     # our cache store. This keeps our application stateless as well.
     config.cache_store = :redis_store, ENV['CACHE_URL'],
-                         { namespace: 'teleporter::cache' }
+                         { namespace: 'blueorigin::cache' }
 
     # If you've never dealt with background workers before, this is the Rails
     # way to use them through Active Job. We just need to tell it to use Sidekiq.
