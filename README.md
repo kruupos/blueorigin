@@ -22,8 +22,7 @@ This app is running with `Docker`. In order to run the app launch the following 
 ```bash
 docker volume create --name blueorigin-postgres
 docker volume create --name blueorigin-redis
-docker-compose run blueorigin rake db:reset
-docker-compose run blueorigin rake db:migrate
+docker-compose run blueorigin rake db:reset db:migrate db:seed
 ```
 
 ## Run the app
@@ -36,13 +35,6 @@ Then please go to [localhost](http://0.0.0.0:8000)
 
 # Tests
 
-## Syntax
-
-Even though Ruby doesn't have a guide style, all the file's syntax have been check using `pre-commit hook` with the popular hook `rubocop`.
-
-## Code coverage
-
-All the controllers have been properly tested with RSpec.
 To run the tests yourself, please do:
 
 ```bash
@@ -51,5 +43,5 @@ docker-compose run blueorigin rake rspec .
 
 # How to use the app?
 
-Please enter you destination and your dates, click on `book` and enjoy your incomming teleportation!
+Please select your destination and your dates, click on `book` and enjoy your incomming teleportation!
 
