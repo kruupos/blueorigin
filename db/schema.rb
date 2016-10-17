@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 20161005060314) do
   create_table "cities", force: :cascade do |t|
     t.string   "name",       null: false
     t.string   "country",    null: false
+    t.float    "latitude",   null: false
+    t.float    "longitude",  null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -31,6 +33,9 @@ ActiveRecord::Schema.define(version: 20161005060314) do
     t.datetime "updated_at",   null: false
   end
 
+  add_index "schedules", ["arrival_id"], name: "index_schedules_on_arrival_id", using: :btree
+  add_index "schedules", ["departure_id"], name: "index_schedules_on_departure_id", using: :btree
+
   create_table "teleporters", force: :cascade do |t|
     t.integer  "schedule_id", null: false
     t.integer  "user_id",     null: false
@@ -38,14 +43,13 @@ ActiveRecord::Schema.define(version: 20161005060314) do
     t.datetime "updated_at",  null: false
   end
 
+  add_index "teleporters", ["schedule_id"], name: "index_teleporters_on_schedule_id", using: :btree
+  add_index "teleporters", ["user_id"], name: "index_teleporters_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "schedules", "cities", column: "arrival_id", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "schedules", "cities", column: "departure_id", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "teleporters", "schedules", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "teleporters", "users", on_update: :cascade, on_delete: :cascade
 end

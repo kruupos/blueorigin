@@ -1,6 +1,12 @@
 class User < ActiveRecord::Base
-  belongs_to :teleporters
-  validates :name, length: { minimum: 2 }, uniqueness: { case_sensitive: false }
+  has_one :teleporter
+  validates :name,  presence: true,
+                    length: { minimum: 2 }, 
+                    uniqueness: { case_sensitive: false }
+
+  def name=(s)
+    write_attribute(:name, s.to_s.capitalize)
+  end
 
   def summary
     as_json(only: %i(id name)).symbolize_keys

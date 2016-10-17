@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   def index
-    @schedule = Schedule.new
     @user = User.new
+    @schedule = Schedule.new
+    @teleporter = Teleporter.new
   end
 end

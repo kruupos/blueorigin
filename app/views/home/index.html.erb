@@ -7,59 +7,74 @@
       </br>
       </br>
 
-      <%= form_for(@schedule, :html => {:class => 'form-horizontal'}) do |f| %>
+      <%= form_for(@teleporter, html: {class: 'form-horizontal'}) do |teleporter| %>
         <fieldset>
           <legend>Reservations</legend>
-          <%= fields_for @user do |u| %>
-          <% if @user.errors.any? %>
-            <div id="error_explanation">
-              <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-           
+
+          <% if (@user.errors.any? || @schedule.errors.any? || @teleporter.errors.any?) %>
+            <div class='error_explanation alert alert-warning'>
               <ul>
-              <% @user.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-              <% end %>
+                  <% @user.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                  <% end %>
+                  <% @schedule.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                  <% end %>
+                  <% @teleporter.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                  <% end %>
               </ul>
             </div>
           <% end %>
+
+          <%= fields_for @user do |user| %>
             <div class='form-group'>
-              <%= u.label(:user, 'Name', :class => 'col-lg-2 control-label') %>
+              <%= user.label(:user, 'Name', class: 'col-lg-2 control-label') %>
               <div class='col-lg-10'>
-                <%= u.text_field(:name, :placeholder => 'Your name', :class => 'form-control') %>
+                <%= user.text_field(:name, placeholder: 'Your name', class: 'form-control') %>
               </div>
             </div>
           <% end %>
-          <div class='form-group'>
-            <%= f.label(:departure, 'Departure', :class => 'col-lg-2 control-label') %>
-            <div class='col-lg-10'>
-              <%= f.collection_select(:departure_id, City.all, :id, :name, {}, {:class => 'form-control'}) %>
+
+          <%= fields_for @schedule do |schedule| %>
+            <div class='form-group'>
+              <%= schedule.label(:departure, 'Departure', class: 'col-lg-2 control-label') %>
+              <div class='col-lg-10'>
+                <%= schedule.collection_select(:departure_id, City.all, :id, :name, {}, {class: 'form-control'}) %>
+              </div>
             </div>
-          </div>
-          <div class='form-group'>
-            <%= f.label(:arrival, 'Arrival', :class => 'col-lg-2 control-label') %>
-            <div class='col-lg-10'>
-              <%= f.collection_select(:arrival_id, City.all, :id, :name, {}, {:class => 'form-control'}) %>
+            <div class='form-group'>
+              <%= schedule.label(:arrival, 'Arrival', class: 'col-lg-2 control-label') %>
+              <div class='col-lg-10'>
+                <%= schedule.collection_select(:arrival_id, City.all, :id, :name, {}, {class: 'form-control'}) %>
+              </div>
             </div>
-          </div>
-          <div class='form-group'>
-            <%= f.label(:date, 'Date', :class => 'col-lg-2 control-label') %>
-            <div class='col-lg-10'>
-              <%= f.text_field(:date, :class => 'form-control datepicker') %>
+            <div class='form-group'>
+              <%= schedule.label(:date, 'Date', class: 'col-lg-2 control-label') %>
+              <div class='col-lg-10'>
+                <%= schedule.text_field(:date, class: 'form-control datepicker') %>
+              </div>
             </div>
-          </div>
+          <% end %>
+
           <div class='form-group'>
             <div class='col-lg-10 col-lg-offset-2'>
-              <%= f.submit('Book', :class => 'btn btn-success') %>
+              <%= teleporter.submit('Book', class: 'btn btn-success') %>
             </div>
           </div>
+
         </fieldset>
       <% end %>
 
     <% flash.each do |name, msg| %>
-      <%= content_tag :div, msg, class: 'alert alert-info' %>
+      <%= content_tag :div, msg, class: 'alert alert-success' %>
     <% end %>
   
     </div>
+
+    <%= javascript_tag do %>
+      window.cities = <%=raw City.all.to_json %>;
+    <% end %>
     <div id='sidebar' class='col-xs-9'>
       <div id='world-map'></div>
     </div>

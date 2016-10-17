@@ -12,23 +12,20 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
 # Use Unicorn as the app server
 gem 'unicorn'
-
 # Use postgres instead of mySQL
 gem 'pg', '~> 0.18.3'
 
 gem 'sidekiq', '~> 4.0.1'
 gem 'redis-rails', '~> 4.0.0'
+gem 'validates_timeliness', '~> 4.0'
 
 group :development, :test do
   gem 'byebug'
   gem 'factory_girl_rails', '~> 4.0'
   gem 'rspec-rails', '~> 3.5'
+  gem 'shoulda-matchers', '~> 3.1'
   gem 'database_cleaner'
 end
 

@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :user do
     sequence :name do |n|
-      "Fake name#{n}"
+      "anon #{n}"
     end
   end
 end
